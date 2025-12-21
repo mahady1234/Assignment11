@@ -18,7 +18,6 @@ const Search = () => {
     const [searched, setSearched] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    // Load districts and upazilas from JSON
     useEffect(() => {
         axios.get("/district.json")
             .then(res => setDistricts(res.data.districts))
@@ -29,16 +28,13 @@ const Search = () => {
             .catch(err => console.error("Failed to load upazilas:", err));
     }, []);
 
-    // Handle dropdown changes
     const handleChange = (e) => {
         const { name, value } = e.target;
 
         if (name === "district") {
-            // district name save
             const districtName = districts.find(d => d.id === value)?.name || "";
             setForm(prev => ({ ...prev, district: districtName, upazila: "" }));
 
-            // filter upazilas for this district
             const filtered = upazilas.filter(u => u.district_id === value);
             setFilteredUpazilas(filtered);
         } else if (name === "upazila") {
@@ -49,7 +45,6 @@ const Search = () => {
         }
     };
 
-    // Search donors
     const handleSearch = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -80,7 +75,6 @@ const Search = () => {
                 onSubmit={handleSearch}
                 className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-white p-5 rounded-lg shadow"
             >
-                {/* Blood Group */}
                 <select
                     name="bloodGroup"
                     required
@@ -94,7 +88,6 @@ const Search = () => {
                     ))}
                 </select>
 
-                {/* District */}
                 <select
                     name="district"
                     value={districts.find(d => d.name === form.district)?.id || ""}
@@ -107,7 +100,6 @@ const Search = () => {
                     ))}
                 </select>
 
-                {/* Upazila */}
                 <select
                     name="upazila"
                     value={upazilas.find(u => u.name === form.upazila)?.id || ""}
@@ -129,7 +121,6 @@ const Search = () => {
                 </button>
             </form>
 
-            {/* Results */}
             <div className="mt-8">
                 {!searched && <p className="text-gray-500 text-center">Please search to find available donors.</p>}
                 {loading && <p className="text-center mt-4">Loading...</p>}
