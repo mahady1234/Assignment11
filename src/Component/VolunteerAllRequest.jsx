@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Loading from "./Loading";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 
@@ -37,7 +36,6 @@ const VolunteerAllRequest = () => {
         fetchRequests();
     }, [statusFilter, page]);
 
-    // ✅ Volunteer can ONLY update status
     const updateStatus = async (id, status) => {
         await axiosSecure.patch(
             "/volunteer/donation-request/status",
@@ -74,7 +72,6 @@ const VolunteerAllRequest = () => {
                 ))}
             </div>
 
-            {/* Table */}
             <div className="overflow-x-auto bg-white rounded-lg shadow">
                 <table className="w-full text-sm">
                     <thead className="bg-gray-100">
@@ -112,7 +109,6 @@ const VolunteerAllRequest = () => {
                                         </span>
                                     </td>
 
-                                    {/* Volunteer: ONLY status update */}
                                     <td className="p-3 text-center">
                                         {req.status === "pending" && (
                                             <button
@@ -139,7 +135,6 @@ const VolunteerAllRequest = () => {
                 </table>
             </div>
 
-            {/* Pagination */}
             <div className="flex justify-center items-center gap-4 mt-6">
                 <button
                     disabled={page === 1}
