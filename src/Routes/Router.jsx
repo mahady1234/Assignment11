@@ -19,6 +19,8 @@ import Search from "../Component/Search";
 import Funding from "../Component/Funding";
 import PaymentCancel from "../Component/PaymentCancel";
 import AdminFunding from "../Component/AdminFunding";
+import DonationRequestView from "../Component/DonationRequestView";
+import DonationRequestEdit from "../Component/DonationRequestEdit";
 
 const router = createBrowserRouter([
     {
@@ -44,13 +46,13 @@ const router = createBrowserRouter([
             {
                 path: '/funding',
                 element: <PrivateRoute><Funding></Funding></PrivateRoute>
-            },{
-                path:'/payment-success',
-                element:<Funding></Funding>
+            }, {
+                path: '/payment-success',
+                element: <Funding></Funding>
             }
-            ,{
-                path:'/payment-cancelled',
-                element:<PaymentCancel></PaymentCancel>
+            , {
+                path: '/payment-cancelled',
+                element: <PaymentCancel></PaymentCancel>
             }
 
         ]
@@ -62,24 +64,24 @@ const router = createBrowserRouter([
         element: <PrivateRoute><DashBoardLayout /></PrivateRoute>,
         children: [
             {
-                index: true, // /dashBoard → MainDashBoard
+                index: true, 
                 element: <PrivateRoute><DashBoardHome /></PrivateRoute>
             },
             {
-                path: 'my-donation-requests', // old: myRequest
+                path: 'my-donation-requests', 
                 element: <PrivateRoute><MyRequest /></PrivateRoute>
             },
             {
-                path: 'volunteer-donation-requests', // old: myRequest
+                path: 'volunteer-donation-requests', 
                 element: <PrivateRoute><VolunteerAllRequest /></PrivateRoute>
             },
             {
-                path: 'admin-donation-requests', // old: myRequest
+                path: 'admin-donation-requests',
                 element: <PrivateRoute><AllDonationRequestAdmin /></PrivateRoute>
             }
             ,
             {
-                path: 'profile', // /dashBoard/profile
+                path: 'profile', 
                 element: <PrivateRoute><Profile /></PrivateRoute>
             },
             {
@@ -93,6 +95,14 @@ const router = createBrowserRouter([
             {
                 path: 'adminFunding',
                 element: <PrivateRoute><AdminFunding></AdminFunding></PrivateRoute>
+            },
+            {
+                path: "donation-request/:id",
+                element: <PrivateRoute><DonationRequestView></DonationRequestView></PrivateRoute>
+            },
+            {
+                path: "edit-donation-request/:id",
+                element: <PrivateRoute><DonationRequestEdit></DonationRequestEdit></PrivateRoute>
             },
         ]
     }

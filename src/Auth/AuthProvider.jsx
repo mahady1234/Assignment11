@@ -6,6 +6,7 @@ export const AuthContext = createContext()
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut, updateProfile } from 'firebase/auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 import axios from 'axios';
 const auth = getAuth(app)
 
@@ -15,6 +16,8 @@ const AuthProvider = ({ children }) => {
     const [roleLoading, setRoleLoading] = useState(true)
     const [role, setRole] = useState('')
     const [userStatus, setUserStatus] = useState('')
+    const axiosSecure = useAxiosSecure(user); 
+
 
 
 
@@ -49,18 +52,21 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
+   
     useEffect(() => {
-        if (!user)
-            return
-        axios.get(`http://localhost:5000/users/role/${user.email}`)
+        if (!user) return;
+
+        axios.get(`http://localhost:5000/users/role/${user.email}`, {
+            headers: { Authorization: `Bearer ${user.accessToken}` }
+        })
             .then(res => {
-                setRole(res.data.role)
-                setUserStatus(res.data.status)
-                setRoleLoading(false)
+                setRole(res.data.role);
+                setUserStatus(res.data.status);
+                setRoleLoading(false);
             })
+            .catch(err => console.log(err));
 
-    }, [user])
-
+    }, [user]);
 
     const authData = {
         auth,

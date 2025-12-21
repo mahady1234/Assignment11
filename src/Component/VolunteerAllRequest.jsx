@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "./Loading";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const VolunteerAllRequest = () => {
     const [requests, setRequests] = useState([]);
@@ -8,14 +9,15 @@ const VolunteerAllRequest = () => {
     const [statusFilter, setStatusFilter] = useState("all");
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+     const axiosSecure=useAxiosSecure()
 
     const limit = 5;
 
     const fetchRequests = async () => {
         setLoading(true);
         try {
-            const res = await axios.get(
-                "http://localhost:5000/volunteer/blood-donation-requests",
+            const res = await axiosSecure.get(
+                "/volunteer/blood-donation-requests",
                 {
                     params: { status: statusFilter, page, limit },
                 }
@@ -37,8 +39,8 @@ const VolunteerAllRequest = () => {
 
     // ✅ Volunteer can ONLY update status
     const updateStatus = async (id, status) => {
-        await axios.patch(
-            "http://localhost:5000/volunteer/donation-request/status",
+        await axiosSecure.patch(
+            "/volunteer/donation-request/status",
             { id, status }
         );
         fetchRequests();

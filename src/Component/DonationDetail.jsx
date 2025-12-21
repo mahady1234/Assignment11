@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { AuthContext } from "../Auth/AuthProvider";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const DonationDetails = () => {
+     const axiosSecure=useAxiosSecure()
     const { id } = useParams();
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
@@ -15,8 +16,8 @@ const DonationDetails = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios
-            .get(`http://localhost:5000/donorRequest/${id}`)
+        axiosSecure
+            .get(`/donorRequest/${id}`)
             .then(res => {
                 setRequest(res.data);
                 setLoading(false);
@@ -25,13 +26,13 @@ const DonationDetails = () => {
                 console.error(err);
                 setLoading(false);
             });
-    }, [id]);
+    }, [axiosSecure, id]);
 
 
 
     const handleConfirmDonation = () => {
-        axios
-            .patch(`http://localhost:5000/donorRequest/${id}`, {
+        axiosSecure
+            .patch(`/donorRequest/${id}`, {
                 status: "inprogress"
             })
             .then(res => {

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Search = () => {
+     const axiosSecure=useAxiosSecure()
     const [form, setForm] = useState({
         bloodGroup: "",
         district: "",
@@ -54,7 +56,7 @@ const Search = () => {
         setSearched(true);
 
         try {
-            const res = await axios.get("http://localhost:5000/public/search-donors", {
+            const res = await axiosSecure.get("/public/search-donors", {
                 params: {
                     bloodGroup: form.bloodGroup,
                     district: form.district,

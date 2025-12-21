@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Loading from "./Loading";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const AllBloodDonationRequestAdmin = () => {
+     const axiosSecure=useAxiosSecure()
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(true);
     const [statusFilter, setStatusFilter] = useState("all");
@@ -14,8 +15,8 @@ const AllBloodDonationRequestAdmin = () => {
     const fetchRequests = async () => {
         setLoading(true);
         try {
-            const res = await axios.get(
-                "http://localhost:5000/admin/blood-donation-requests",
+            const res = await axiosSecure.get(
+                "/admin/blood-donation-requests",
                 {
                     params: { status: statusFilter, page, limit },
                 }
@@ -36,8 +37,8 @@ const AllBloodDonationRequestAdmin = () => {
     }, [statusFilter, page]);
 
     const updateStatus = async (id, status) => {
-        await axios.patch(
-            "http://localhost:5000/admin/donation-request/status",
+        await axiosSecure.patch(
+            "/admin/donation-request/status",
             { id, status }
         );
         fetchRequests();

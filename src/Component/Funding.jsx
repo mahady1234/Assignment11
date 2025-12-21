@@ -1,13 +1,14 @@
 
 
 
-import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Auth/AuthProvider';
 import { useSearchParams } from 'react-router';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const Funding = () => {
     const { user } = useContext(AuthContext);
+     const axiosSecure=useAxiosSecure()
     const [searchParams] = useSearchParams();
     const session_id = searchParams.get('session_id');
 
@@ -22,7 +23,7 @@ const Funding = () => {
 
         const formData = { donateAmount, userEmail, donorName };
 
-        axios.post('http://localhost:5000/create-payment-checkout', { formData })
+        axiosSecure.post('/create-payment-checkout', { formData })
             .then(res => {
                 console.log(res.data);
                 window.location.href = res.data.url; 
@@ -34,7 +35,7 @@ const Funding = () => {
         if (session_id) {
             const fetchSuccess = async () => {
                 try {
-                    const res = await axios.post(`http://localhost:5000/success-payment?session_id=${session_id}`);
+                    const res = await axiosSecure.post(`/success-payment?session_id=${session_id}`);
                     console.log(res.data);
                     fetchFundings(); 
                    
@@ -45,12 +46,12 @@ const Funding = () => {
             }
             fetchSuccess();
         }
-    }, [session_id]);
+    }, [axiosSecure,  session_id]);
 
 
     const fetchFundings = () => {
         setLoading(true);
-        axios.get('http://localhost:5000/donations') 
+        axiosSecure.get('/donations') 
             .then(res => {
                 setFundings(res.data);
                 setLoading(false);

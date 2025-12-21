@@ -3,12 +3,13 @@
 
 
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Auth/AuthProvider";
 import Loading from "./Loading";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const AllDonationRequest = () => {
+     const axiosSecure=useAxiosSecure()
     const [requests, setRequests] = useState([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
@@ -21,7 +22,7 @@ const AllDonationRequest = () => {
     const fetchRequests = async (pageNumber = 1) => {
         setLoading(true);
         try {
-            const res = await axios.get("http://localhost:5000/donorRequest", {
+            const res = await axiosSecure.get("/donorRequest", {
                 params: { limit, page: pageNumber }
             });
             setRequests(res.data.data);
@@ -36,7 +37,7 @@ const AllDonationRequest = () => {
 
     useEffect(() => {
         fetchRequests(page);
-    }, [page]);
+    }, [ page]);
 
     const handleView = (id) => {
         if (!user) navigate("/authRoot/login");

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { MoreVertical } from "lucide-react";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const AllUsers = () => {
+     const axiosSecure=useAxiosSecure()
     const [users, setUsers] = useState([]);
     const [statusFilter, setStatusFilter] = useState("all");
 
     const fetchUsers = async () => {
-        const res = await axios.get("http://localhost:5000/users");
+        const res = await axiosSecure.get("/users");
         setUsers(res.data);
     };
 
@@ -16,15 +17,15 @@ const AllUsers = () => {
     }, []);
 
     const updateStatus = async (email, status) => {
-        await axios.patch(
-            `http://localhost:5000/users/status?email=${email}&status=${status}`
+        await axiosSecure.patch(
+            `/users/status?email=${email}&status=${status}`
         );
         fetchUsers();
     };
 
     const updateRole = async (email, role) => {
-        await axios.patch(
-            `http://localhost:5000/users/role?email=${email}&role=${role}`
+        await axiosSecure.patch(
+            `/users/role?email=${email}&role=${role}`
         );
         fetchUsers();
     };
@@ -40,8 +41,8 @@ const AllUsers = () => {
 
                 {/* Header */}
                 <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-2xl font-semibold text-gray-700">
-                        All Users 👤
+                    <h2 className="text-xl font-semibold text-gray-700">
+                        All Users 
                     </h2>
 
                     {/* Filter */}

@@ -3,10 +3,11 @@ import { AuthContext } from "../Auth/AuthProvider";
 import { toast } from "react-toastify";
 import MyContainer from "../Component/MyContainer";
 import axios from "axios";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Profile = () => {
     const { user, updateUser, logOut } = useContext(AuthContext);
-
+ const axiosSecure=useAxiosSecure()
     const [editMode, setEditMode] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -37,7 +38,7 @@ const Profile = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        axios.get(`http://localhost:5000/users/email/${user.email}`)
+        axiosSecure.get(`/users/email/${user.email}`)
             .then(res => {
                 setFormData({
                     name: res.data.name || user.displayName || "",
@@ -48,7 +49,7 @@ const Profile = () => {
                 });
                 setLoading(false);
             });
-    }, [user]);
+    }, [axiosSecure, user]);
 
 
     /* ---------------- Handle Change ---------------- */
@@ -85,8 +86,8 @@ const Profile = () => {
                 photoURL: imageUrl
             });
 
-            await axios.patch(
-                `http://localhost:5000/users/email/${user.email}`,
+            await axiosSecure.patch(
+                `/users/email/${user.email}`,
                 {
                     name: formData.name,
                     imageUrl,

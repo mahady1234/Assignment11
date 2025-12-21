@@ -1,47 +1,45 @@
+
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Auth/AuthProvider";
-import axios from "axios";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const MainDashBoard = () => {
+     const axiosSecure=useAxiosSecure()
     const { user } = useContext(AuthContext);
     const [requests, setRequests] = useState([]);
 
+    // Fetch 3 most recent requests for this donor
     useEffect(() => {
         if (user?.email) {
-            axios
-                .get(`http://localhost:5000/donorRequest?email=${user.email}&limit=3`)
-                .then(res => setRequests(res.data))
+            axiosSecure
+                .get(`/donorRequest?email=${user.email}&status=all&limit=3`)
+                .then(res => setRequests(res.data.data))
                 .catch(err => console.log(err));
         }
-    }, [user]);
+    }, [axiosSecure, user]);
 
-    // 🔹 Update Status (ONLY inprogress → done / canceled)
+    // Update status: inprogress → done / canceled
     const handleStatusUpdate = async (id, newStatus) => {
         try {
-            await axios.patch(`http://localhost:5000/donorRequest/${id}`, {
+            const res = await axiosSecure.patch(`/donorRequest/${id}`, {
                 status: newStatus
             });
-
             setRequests(prev =>
-                prev.map(item =>
-                    item._id === id ? { ...item, status: newStatus } : item
-                )
+                prev.map(item => item._id === id ? { ...item, status: res.data.status } : item)
             );
         } catch (error) {
             console.log(error);
         }
     };
 
-    // 🔹 Delete Request
+    // Delete request
     const handleDelete = async (id) => {
-        const isConfirm = window.confirm(
-            "Are you sure you want to delete this donation request?"
-        );
+        const isConfirm = window.confirm("Are you sure you want to delete this donation request?");
         if (!isConfirm) return;
 
         try {
-            await axios.delete(`http://localhost:5000/donorRequest/${id}`);
+            await axiosSecure.delete(`/donorRequest/${id}`);
             setRequests(prev => prev.filter(item => item._id !== id));
         } catch (error) {
             console.log(error);
@@ -50,29 +48,21 @@ const MainDashBoard = () => {
 
     return (
         <div className="p-6">
-
-            {/* 🔹 Welcome */}
+            {/* Welcome */}
             <div className="mb-8">
                 <h2 className="text-3xl font-bold flex items-center gap-2">
                     Welcome,
-                    <span className="text-red-600">
-                        {user?.displayName || "Donor"}
-                    </span>
-
+                    <span className="text-red-600">{user?.displayName || "Donor"}</span>
                 </h2>
                 <p className="text-gray-600">
                     Here is an overview of your recent donation requests
                 </p>
             </div>
 
-            {/* 🔹 Recent Requests (only if exists) */}
+            {/* Recent Requests */}
             {requests.length > 0 ? (
                 <div className="bg-white shadow rounded-lg p-5">
-
-                    <h3 className="text-xl font-semibold mb-4">
-                        Recent Donation Requests
-                    </h3>
-
+                    <h3 className="text-xl font-semibold mb-4">Recent Donation Requests</h3>
                     <div className="overflow-x-auto">
                         <table className="table w-full">
                             <thead className="bg-gray-100">
@@ -87,7 +77,6 @@ const MainDashBoard = () => {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-
                             <tbody>
                                 {requests.map(req => (
                                     <tr key={req._id}>
@@ -96,19 +85,14 @@ const MainDashBoard = () => {
                                         <td>{req.donationDate}</td>
                                         <td>{req.donationTime}</td>
                                         <td>{req.bloodGroup}</td>
-
-                                        <td className="capitalize font-medium">
-                                            {req.status}
-                                        </td>
+                                        <td className="capitalize font-medium">{req.status}</td>
 
                                         {/* Donor Info */}
                                         <td>
                                             {req.status === "inprogress" ? (
                                                 <div className="text-sm">
                                                     <p>{user.displayName}</p>
-                                                    <p className="text-gray-500">
-                                                        {user.email}
-                                                    </p>
+                                                    <p className="text-gray-500">{user.email}</p>
                                                 </div>
                                             ) : (
                                                 <span className="text-gray-400">—</span>
@@ -117,49 +101,33 @@ const MainDashBoard = () => {
 
                                         {/* Actions */}
                                         <td className="space-x-1">
-
                                             {req.status === "inprogress" && (
                                                 <>
                                                     <button
-                                                        onClick={() =>
-                                                            handleStatusUpdate(req._id, "done")
-                                                        }
+                                                        onClick={() => handleStatusUpdate(req._id, "done")}
                                                         className="btn btn-xs btn-success"
-                                                    >
-                                                        Done
-                                                    </button>
-
+                                                    >Done</button>
                                                     <button
-                                                        onClick={() =>
-                                                            handleStatusUpdate(req._id, "canceled")
-                                                        }
+                                                        onClick={() => handleStatusUpdate(req._id, "canceled")}
                                                         className="btn btn-xs btn-error"
-                                                    >
-                                                        Cancel
-                                                    </button>
+                                                    >Cancel</button>
                                                 </>
                                             )}
 
                                             <Link
                                                 to={`/dashBoard/donation-request/${req._id}`}
                                                 className="btn btn-xs btn-info"
-                                            >
-                                                View
-                                            </Link>
+                                            >View</Link>
 
                                             <Link
                                                 to={`/dashBoard/edit-donation-request/${req._id}`}
                                                 className="btn btn-xs btn-warning"
-                                            >
-                                                Edit
-                                            </Link>
+                                            >Edit</Link>
 
                                             <button
                                                 onClick={() => handleDelete(req._id)}
                                                 className="btn btn-xs btn-outline btn-error"
-                                            >
-                                                Delete
-                                            </button>
+                                            >Delete</button>
                                         </td>
                                     </tr>
                                 ))}
@@ -167,51 +135,27 @@ const MainDashBoard = () => {
                         </table>
                     </div>
 
-                    {/* 🔹 View All */}
+                    {/* View All */}
                     <div className="mt-5 text-right">
                         <Link
                             to="/dashBoard/my-donation-requests"
                             className="btn btn-sm btn-neutral"
-                        >
+                        >View My All Requests</Link>
+                    </div>
+                </div>
+            ) : (
+                <div className="bg-white shadow rounded-lg p-5">
+                    <h3 className="text-xl font-semibold mb-4">Recent Donation Requests</h3>
+                    <h3 className="text-center text-red-400 font-bold py-2">
+                        You have no donation request at now
+                    </h3>
+                    <div className="mt-5 text-right">
+                        <Link to='/dashBoard/my-donation-requests' className="btn btn-sm btn-neutral">
                             View My All Requests
                         </Link>
                     </div>
                 </div>
-            ) : (<div className="bg-white shadow rounded-lg p-5">
-
-                <h3 className="text-xl font-semibold mb-4">
-                    Recent Donation Requests
-                </h3>
-
-                <div className="overflow-x-auto">
-                    <table className="table w-full">
-                        <thead className="bg-gray-100">
-                            <tr>
-                                <th>Recipient</th>
-                                <th>Location</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Blood</th>
-                                <th>Status</th>
-                                <th>Donor Info</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-
-
-                    </table>
-                    <h3 className="text-center text-red-400 font-bold py-2">You have no dontion request at now</h3>
-                </div>
-
-                {/* 🔹 View All */}
-                <div className="mt-5 text-right">
-                    <Link to='/dashBoard/my-donation-requests' className="btn btn-sm btn-neutral">
-                        View My All Requests
-                    </Link>
-
-
-                </div>
-            </div>)}
+            )}
         </div>
     );
 };

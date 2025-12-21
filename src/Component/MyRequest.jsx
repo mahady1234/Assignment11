@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import { AuthContext } from "../Auth/AuthProvider";
 import Loading from "./Loading";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const MyRequest = () => {
     const { user } = useContext(AuthContext);
+     const axiosSecure=useAxiosSecure()
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(true);
     const [statusFilter, setStatusFilter] = useState("all");
@@ -16,7 +17,7 @@ const MyRequest = () => {
         if (!user?.email) return;
         setLoading(true);
         try {
-            const res = await axios.get("http://localhost:5000/my-donation-requests", {
+            const res = await axiosSecure.get("/my-donation-requests", {
                 params: { email: user.email, status: statusFilter, page, limit },
             });
             setRequests(res.data.requests);

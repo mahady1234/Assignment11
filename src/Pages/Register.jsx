@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../Auth/AuthProvider";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +14,9 @@ const Register = () => {
     const [districts, setDistricts] = useState([]);
     const [upazilas, setUpazilas] = useState([]);
     const [filteredUpazilas, setFilteredUpazilas] = useState([]);
+     
+
+    const axiosSecure = useAxiosSecure()
 
     const { createUser, updateUser, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -78,7 +82,7 @@ const Register = () => {
             };
 
             // Save to server
-            await axios.post("http://localhost:5000/users", userInfo);
+            await axiosSecure.post("/users", userInfo);
 
             setUser({ ...loggedUser, displayName: name, photoURL: imageUrl });
             toast.success("Registration successful!");

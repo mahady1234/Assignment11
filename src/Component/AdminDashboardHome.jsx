@@ -1,13 +1,14 @@
 import DonationRequestChart from "./DonationRequestChart";
-import axios from "axios";
 import { Users, Droplet, DollarSign } from "lucide-react";
 import StatCard from "./StateCard";
 import { useEffect, useState } from "react";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 
 
 
 const AdminDashboardHome = () => {
+    const axiosSecure = useAxiosSecure()
     const [stats, setStats] = useState({
         totalDonors: 0,
         totalFunding: 0,
@@ -21,7 +22,7 @@ const AdminDashboardHome = () => {
     });
 
     useEffect(() => {
-        axios.get("http://localhost:5000/admin/donation-request-stats")
+        axiosSecure.get("/admin/donation-request-stats")
             .then(res => {
                 setChartData({
                     daily: res.data.daily.map(d => ({
@@ -42,7 +43,7 @@ const AdminDashboardHome = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/admin/stats")
+        axiosSecure.get("/admin/stats")
             .then(res => {
                 setStats(res.data);
                 setLoading(false);
@@ -51,7 +52,7 @@ const AdminDashboardHome = () => {
                 console.error(err);
                 setLoading(false);
             });
-    }, []);
+    }, [axiosSecure]);
 
     if (loading) {
         return <p className="text-center mt-10">Loading dashboard...</p>;
@@ -78,7 +79,7 @@ const AdminDashboardHome = () => {
                     <StatCard
                         icon={<DollarSign size={28} />}
                         title="Total Funding"
-                        value={`৳ ${stats.totalFunding}`}
+                        value={`$ ${stats.totalFunding}`}
                     />
                     <StatCard
                         icon={<Droplet size={28} />}
