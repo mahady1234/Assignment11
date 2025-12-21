@@ -39,13 +39,11 @@ const AllUsers = () => {
         <div className="p-6 bg-gray-100 min-h-screen">
             <div className="bg-white rounded-xl shadow-md p-6">
 
-                {/* Header */}
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-xl font-semibold text-gray-700">
                         All Users 
                     </h2>
 
-                    {/* Filter */}
                     <select
                         value={statusFilter}
                         onChange={e => setStatusFilter(e.target.value)}
@@ -57,7 +55,6 @@ const AllUsers = () => {
                     </select>
                 </div>
 
-                {/* Table */}
                 <div className="overflow-x-auto">
                     <table className="table w-full">
                         <thead className="bg-gray-200">
@@ -73,7 +70,6 @@ const AllUsers = () => {
                         <tbody>
                             {filteredUsers.map(user => (
                                 <tr key={user._id} className="hover">
-                                    {/* Avatar + Name */}
                                     <td className="flex items-center gap-3">
                                         <img
                                             src={user.imageUrl}
@@ -97,7 +93,6 @@ const AllUsers = () => {
                                         </span>
                                     </td>
 
-                                    {/* Actions */}
                                     <td className="text-center">
                                         <div className="dropdown dropdown-end">
                                             <label tabIndex={0} className="btn btn-ghost btn-sm">
@@ -108,7 +103,6 @@ const AllUsers = () => {
                                                 tabIndex={0}
                                                 className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-44"
                                             >
-                                                {/* Block / Unblock */}
                                                 {user.status === "Active" ? (
                                                     <li>
                                                         <button
@@ -131,7 +125,6 @@ const AllUsers = () => {
                                                     </li>
                                                 )}
 
-                                                {/* Make Volunteer */}
                                                 {user.role === "donor" && (
                                                     <li>
                                                         <button
@@ -144,7 +137,6 @@ const AllUsers = () => {
                                                     </li>
                                                 )}
 
-                                                {/* Make Admin */}
                                                 {user.role !== "Admin" && (
                                                     <li>
                                                         <button
