@@ -21,14 +21,12 @@ export default function Aside() {
         setOpen(false);
     };
 
-    /* 🔹 1️⃣ Route change হলে sidebar auto close (mobile) */
     useEffect(() => {
         setOpen(false);
     }, [location.pathname
 
     ]);
 
-    /* 🔹 2️⃣ ESC key press করলে sidebar close */
     useEffect(() => {
         const handleEsc = (e) => {
             if (e.key === "Escape") {
@@ -47,7 +45,6 @@ export default function Aside() {
     return (
         <div className="flex min-h-screen relative">
 
-            {/* 🔹 3️⃣ Overlay (outside click → close) */}
             {open && (
                 <div
                     onClick={() => setOpen(false)}
@@ -55,7 +52,6 @@ export default function Aside() {
                 />
             )}
 
-            {/* SIDEBAR */}
             <aside
                 className={`bg-gray-900 text-white fixed md:static z-40
                 h-full w-64 transform transition-transform duration-300 ease-in-out
@@ -63,7 +59,6 @@ export default function Aside() {
                 md:translate-x-0`}
             >
 
-                {/* HEADER */}
                 <div className="h-16 flex items-center justify-end px-4 border-b border-gray-700">
                     <button
                         onClick={() => setOpen(!open)}
@@ -73,7 +68,6 @@ export default function Aside() {
                     </button>
                 </div>
 
-                {/* MENU */}
                 <nav className="px-3 py-4 space-y-2">
 
                     <NavLink to="/dashBoard" className={linkClass}>
@@ -158,7 +152,6 @@ export default function Aside() {
                 </nav>
             </aside>
 
-            {/* MOBILE MENU BUTTON */}
             <div className="md:hidden fixed top-4 left-4 z-50">
                 <button
                     onClick={() => setOpen(true)}
