@@ -1,4 +1,4 @@
-// Register.jsx
+
 import { useContext, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -21,7 +21,6 @@ const Register = () => {
     const { createUser, updateUser, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    // JSON থেকে load করা হচ্ছে
     useEffect(() => {
         axios.get("/district.json").then(res => setDistricts(res.data.districts));
         axios.get("/upazila.json").then(res => setUpazilas(res.data.upazilas));
@@ -53,11 +52,9 @@ const Register = () => {
         if (password !== confirmPassword) return setError("Passwords do not match.");
 
         try {
-            // Firebase user create
             const result = await createUser(email, password);
             const loggedUser = result.user;
 
-            // Image upload
             const formData = new FormData();
             formData.append("image", imageFile);
             const imgRes = await axios.post(`https://api.imgbb.com/1/upload?key=e793f21788fc31a56683162de3c21a1e`, formData);
@@ -65,7 +62,6 @@ const Register = () => {
 
             await updateUser({ displayName: name, photoURL: imageUrl });
 
-            // JSON থেকে district এবং upazila name mapping
             const districtName = districts.find(d => d.id === districtId)?.name || "";
             const upazilaName = upazilas.find(u => u.id === upazilaId)?.name || "";
 
@@ -75,13 +71,12 @@ const Register = () => {
                 password,
                 imageUrl,
                 bloodGroup,
-                district: districtName, // এখানে name পাঠানো হচ্ছে
-                upazila: upazilaName,   // এখানে name পাঠানো হচ্ছে
+                district: districtName, 
+                upazila: upazilaName,   
                 role: "donor",
                 status: "Active"
             };
 
-            // Save to server
             await axiosSecure.post("/users", userInfo);
 
             setUser({ ...loggedUser, displayName: name, photoURL: imageUrl });
