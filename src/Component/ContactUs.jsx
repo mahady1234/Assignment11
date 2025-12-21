@@ -37,7 +37,6 @@ const ContactUs = () => {
 
                 <div className="grid md:grid-cols-2 gap-8 bg-white rounded-xl shadow-lg p-8">
 
-                    {/* Contact Info */}
                     <div>
                         <h3 className="text-xl font-semibold text-red-600 mb-4">
                             Get in Touch
@@ -79,7 +78,6 @@ const ContactUs = () => {
                         </div>
                     </div>
 
-                    {/* Contact Form */}
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700">

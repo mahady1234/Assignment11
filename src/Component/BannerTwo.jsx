@@ -10,7 +10,6 @@ const BannerTwo = () => {
             <Banner ></Banner>
             <div className="max-w-6xl mx-auto px-6 pb-8 grid md:grid-cols-2 gap-10 items-center mt-8">
 
-                {/* Text Content */}
                 <div>
                     <h1 className="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">
                         Donate Blood, <span className="text-red-600">Save Lives</span>
@@ -38,7 +37,6 @@ const BannerTwo = () => {
                     </div>
                 </div>
 
-                {/* Image / Illustration */}
                 <div className="flex justify-center">
                     <img
                         src="https://plus.unsplash.com/premium_photo-1723114841540-0189f6449713?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njl8fGJsb29kJTIwZG9uYXRpb258ZW58MHx8MHx8fDA%3D"

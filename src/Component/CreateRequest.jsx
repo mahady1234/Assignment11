@@ -15,7 +15,6 @@ const CreateRequest = () => {
 
     const [selectedDistrictId, setSelectedDistrictId] = useState("");
 
-    /* ---------------- Load JSON data ---------------- */
     useEffect(() => {
         axios.get("/district.json")
             .then(res => setDistricts(res.data.districts || []));
@@ -24,7 +23,6 @@ const CreateRequest = () => {
             .then(res => setUpazilas(res.data.upazilas || []));
     }, []);
 
-    /* ---------------- District Change ---------------- */
     const handleDistrictChange = (e) => {
         const districtId = e.target.value;
         setSelectedDistrictId(districtId);
@@ -35,12 +33,10 @@ const CreateRequest = () => {
         setFilteredUpazilas(matchedUpazilas);
     };
 
-    /* ---------------- Submit ---------------- */
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
 
-        // 🔥 ID → NAME mapping (core fix)
         const selectedDistrict = districts.find(
             d => d.id === selectedDistrictId
         );
@@ -54,7 +50,6 @@ const CreateRequest = () => {
             email: user?.email || "",
             recipientName: form.recipientName.value,
 
-            // ✅ DB will store NAME, not ID
             district: selectedDistrict?.name || "",
             upazila: selectedUpazila?.name || "",
 
@@ -89,7 +84,6 @@ const CreateRequest = () => {
 
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-                    {/* Requester Name */}
                     <div>
                         <label className="block mb-1 font-semibold text-gray-700">
                             Requester Name
@@ -102,7 +96,6 @@ const CreateRequest = () => {
                         />
                     </div>
 
-                    {/* Email */}
                     <div>
                         <label className="block mb-1 font-semibold text-gray-700">
                             Email
@@ -115,7 +108,6 @@ const CreateRequest = () => {
                         />
                     </div>
 
-                    {/* Recipient */}
                     <div>
                         <label className="block mb-1 font-semibold text-gray-700">
                             Recipient Name
@@ -128,7 +120,6 @@ const CreateRequest = () => {
                         />
                     </div>
 
-                    {/* Blood Group */}
                     <div>
                         <label className="block mb-1 font-semibold text-gray-700">
                             Blood Group
@@ -146,7 +137,6 @@ const CreateRequest = () => {
                         </select>
                     </div>
 
-                    {/* District & Upazila */}
                     <div>
                         <label className="block mb-1 font-semibold text-gray-700">
                             District
@@ -183,7 +173,6 @@ const CreateRequest = () => {
                         </select>
                     </div>
 
-                    {/* Hospital */}
                     <div className="md:col-span-2">
                         <label className="block mb-1 font-semibold text-gray-700">
                             Hospital Name
@@ -196,7 +185,6 @@ const CreateRequest = () => {
                         />
                     </div>
 
-                    {/* Address */}
                     <div className="md:col-span-2">
                         <label className="block mb-1 font-semibold text-gray-700">
                             Full Address
@@ -209,7 +197,6 @@ const CreateRequest = () => {
                         />
                     </div>
 
-                    {/* Date */}
                     <div>
                         <label className="block mb-1 font-semibold text-gray-700">
                             Donation Date
@@ -222,7 +209,6 @@ const CreateRequest = () => {
                         />
                     </div>
 
-                    {/* Time */}
                     <div>
                         <label className="block mb-1 font-semibold text-gray-700">
                             Donation Time
@@ -235,7 +221,6 @@ const CreateRequest = () => {
                         />
                     </div>
 
-                    {/* Message */}
                     <div className="md:col-span-2">
                         <label className="block mb-1 font-semibold text-gray-700">
                             Request Message
@@ -249,7 +234,6 @@ const CreateRequest = () => {
                         />
                     </div>
 
-                    {/* Submit */}
                     <div className="md:col-span-2">
                         <button
                             type="submit"
