@@ -25,7 +25,6 @@ const Profile = () => {
     });
 
 
-    /* ---------------- Load District & Upazila ---------------- */
     useEffect(() => {
         axios.get("/district.json")
             .then(res => setDistricts(res.data.districts));
@@ -34,7 +33,6 @@ const Profile = () => {
             .then(res => setUpazilas(res.data.upazilas));
     }, []);
 
-    /* ---------------- Load User Data ---------------- */
     useEffect(() => {
         if (!user?.email) return;
 
@@ -52,13 +50,11 @@ const Profile = () => {
     }, [axiosSecure, user]);
 
 
-    /* ---------------- Handle Change ---------------- */
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    /* ---------------- Image Upload ---------------- */
     const handleImageUpload = async () => {
         if (!imageFile) return formData.imageUrl;
 
@@ -74,7 +70,6 @@ const Profile = () => {
     };
 
 
-    /* ---------------- Save Profile ---------------- */
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -128,7 +123,6 @@ const Profile = () => {
                     <p className="text-black">{user.email}</p>
                 </div>
 
-                {/* Edit Button */}
                 <div className="flex justify-end mb-4">
                     <button
                         onClick={() => setEditMode(!editMode)}
@@ -138,7 +132,6 @@ const Profile = () => {
                     </button>
                 </div>
 
-                {/* Form */}
                 <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4">
 
                     <input
@@ -157,7 +150,6 @@ const Profile = () => {
                         className="input input-bordered w-full bg-gray-100"
                     />
 
-                    {/* District */}
                     <select
                         name="district"
                         value={formData.district}
@@ -171,7 +163,6 @@ const Profile = () => {
                         ))}
                     </select>
 
-                    {/* Upazila */}
                     <select
                         name="upazila"
                         value={formData.upazila}
@@ -186,7 +177,6 @@ const Profile = () => {
                             ))}
                     </select>
 
-                    {/* Blood Group */}
                     <select
                         name="bloodGroup"
                         value={formData.bloodGroup}
@@ -200,7 +190,6 @@ const Profile = () => {
                         )}
                     </select>
 
-                    {/* Image Upload */}
                     {editMode && (
                         <input
                             type="file"
