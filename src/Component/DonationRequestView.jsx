@@ -42,7 +42,6 @@ const DonationRequestView = () => {
 
     return (
         <div className="max-w-3xl mx-auto px-4 py-10">
-            {/* Header */}
             <div className="mb-6">
                 <h2 className="text-3xl font-bold text-gray-800">
                     Donation Request Details
@@ -52,7 +51,6 @@ const DonationRequestView = () => {
                 </p>
             </div>
 
-            {/* Card */}
             <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 space-y-4">
                 <Info label="Recipient Name" value={request.recipientName} />
 
@@ -81,7 +79,6 @@ const DonationRequestView = () => {
                     value={request.message || "No message provided"}
                 />
 
-                {/* Back Button */}
                 <div className="pt-6 text-right">
                     <Link
                         to="/dashboard"
