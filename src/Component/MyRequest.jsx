@@ -11,7 +11,7 @@ const MyRequest = () => {
     const [statusFilter, setStatusFilter] = useState("all");
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const limit = 5; // rows per page
+    const limit = 5;
 
     const fetchRequests = async () => {
         if (!user?.email) return;
@@ -40,7 +40,7 @@ const MyRequest = () => {
         <div className="p-6 max-w-6xl mx-auto mt-10">
             <h1 className="text-3xl font-bold mb-6">My Donation Requests</h1>
 
-            {/* Filter */}
+         
             <div className="flex gap-3 mb-6 flex-wrap">
                 {["all", "pending", "inprogress", "done", "canceled"].map((status) => (
                     <button
@@ -56,7 +56,7 @@ const MyRequest = () => {
                 ))}
             </div>
 
-            {/* Table */}
+         
             <div className="overflow-x-auto border rounded">
                 <table className="w-full table-auto">
                     <thead className="bg-gray-200">
@@ -105,7 +105,7 @@ const MyRequest = () => {
                 </table>
             </div>
 
-            {/* Pagination */}
+          
             <div className="flex justify-center gap-3 mt-4">
                 <button
                     className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"

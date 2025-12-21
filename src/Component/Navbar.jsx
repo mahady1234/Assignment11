@@ -43,8 +43,7 @@ const Navbar = () => {
 
 
                                 {user && <li><NavLink to='/funding'>Funding</NavLink></li>}
-                                {/* {user && <li><NavLink to='/authRoot/createProfile'>Create A Profile</NavLink></li>}
-                                {user && <li><NavLink to='/authRoot/myConnections'>My Connections</NavLink></li>} */}
+                              
                             </ul>
                         </div>
 
