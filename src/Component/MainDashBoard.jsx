@@ -9,7 +9,6 @@ const MainDashBoard = () => {
     const { user } = useContext(AuthContext);
     const [requests, setRequests] = useState([]);
 
-    // Fetch 3 most recent requests for this donor
     useEffect(() => {
         if (user?.email) {
             axiosSecure
@@ -19,7 +18,6 @@ const MainDashBoard = () => {
         }
     }, [axiosSecure, user]);
 
-    // Update status: inprogress → done / canceled
     const handleStatusUpdate = async (id, newStatus) => {
         try {
             const res = await axiosSecure.patch(`/donorRequest/${id}`, {
@@ -33,7 +31,6 @@ const MainDashBoard = () => {
         }
     };
 
-    // Delete request
     const handleDelete = async (id) => {
         const isConfirm = window.confirm("Are you sure you want to delete this donation request?");
         if (!isConfirm) return;
@@ -48,7 +45,6 @@ const MainDashBoard = () => {
 
     return (
         <div className="p-6">
-            {/* Welcome */}
             <div className="mb-8">
                 <h2 className="text-3xl font-bold flex items-center gap-2">
                     Welcome,
@@ -59,7 +55,6 @@ const MainDashBoard = () => {
                 </p>
             </div>
 
-            {/* Recent Requests */}
             {requests.length > 0 ? (
                 <div className="bg-white shadow rounded-lg p-5">
                     <h3 className="text-xl font-semibold mb-4">Recent Donation Requests</h3>
@@ -87,7 +82,6 @@ const MainDashBoard = () => {
                                         <td>{req.bloodGroup}</td>
                                         <td className="capitalize font-medium">{req.status}</td>
 
-                                        {/* Donor Info */}
                                         <td>
                                             {req.status === "inprogress" ? (
                                                 <div className="text-sm">
@@ -99,7 +93,6 @@ const MainDashBoard = () => {
                                             )}
                                         </td>
 
-                                        {/* Actions */}
                                         <td className="space-x-1">
                                             {req.status === "inprogress" && (
                                                 <>
@@ -135,7 +128,6 @@ const MainDashBoard = () => {
                         </table>
                     </div>
 
-                    {/* View All */}
                     <div className="mt-5 text-right">
                         <Link
                             to="/dashBoard/my-donation-requests"
