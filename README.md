@@ -1,14 +1,14 @@
-🩸 LifeFlow | Comprehensive Blood Donation Management System
-LifeFlow is a robust MERN-stack platform designed to bridge the gap between blood donors and recipients. It streamlines the process of requesting blood, managing donor databases, and handling emergency requirements through a role-based dashboard system (Admin, Volunteer, and Donor).
+### RedHope | Blood Donation Website
+RedHope is a robust MERN-stack platform designed to bridge the gap between blood donors and recipients. It streamlines the process of requesting blood, managing donor databases, and handling emergency requirements through a role-based dashboard system (Admin, Volunteer, and Donor).
 
-🌐 Live Deployment
-Live Site: [Insert Your Live Link Here]
+### Live Deployment
+Live Site: (https://fantastic-blancmange-4be651.netlify.app/)
 
-Client Repository: [Insert GitHub Client Link]
+Client Repository: [(https://github.com/mahady1234/Assignment11.git)]
 
-Server Repository: [Insert GitHub Server Link]
+Server Repository: [https://github.com/mahady1234/Assignment11ServerSite.git]
 
-🛠️ Tech Stack & Packages Used
+### Tech Stack & Packages Used
 Frontend
 Framework: React (v19) with Vite
 
@@ -33,40 +33,40 @@ Authentication: Firebase Auth & JWT (JSON Web Tokens)
 
 Payment: Stripe (for Funding System)
 
-✨ Key Features
-🔐 Role-Based Access Control (RBAC)
+### Key Features
+### Role-Based Access Control (RBAC)
 Admin: Full control over users (block/unblock), role management, and all donation requests.
 
 Volunteer: Can manage all donation requests and update statuses, with restricted access to administrative settings.
 
 Donor: Can create blood requests, manage personal profile, and view their donation history.
 
-🩸 Donation Management
+### Donation Management
 Search Engine: Advanced filtering by Blood Group, District, and Upazila to find donors instantly.
 
 Request Lifecycle: Complete workflow from Pending → Inprogress → Done/Canceled.
 
 Public Requests: A dedicated page for pending requests where any logged-in user can step up to donate.
 
-📊 Advanced Dashboard
+### Advanced Dashboard
 Statistics: Interactive charts (using Recharts) showing total donors, funds, and donation requests.
 
 Pagination & Filtering: Tabular data management with server-side pagination for seamless performance.
 
 Dynamic Profile: Non-editable email security with an easy-to-use toggle for profile updates.
 
-💳 Funding & Payments
+### Funding & Payments
 Secure Transactions: Integrated Stripe Payment Gateway for users to contribute funds to the organization.
 
 Financial History: A transparent funding page showing all contributions in real-time.
 
-🚀 Installation & Local Setup
+### Installation & Local Setup
 Clone the repositories:
 
 Bash
 
-git clone https://github.com/your-username/blood-donation-client
-git clone https://github.com/your-username/blood-donation-server
+git clone  https://github.com/mahady1234/Assignment11.git
+git clone https://github.com/mahady1234/Assignment11ServerSite.git
 Install dependencies (both Client & Server):
 
 Bash
@@ -93,14 +93,13 @@ Run the application:
 Bash
 
 npm run dev
- Security Measures
+### Security Measures
 Environment Variables: Sensitive Firebase and MongoDB credentials are fully secured.
 
 JWT Authentication: Private routes and APIs are protected via JWT tokens stored securely.
 
 CORS Configuration: Server is optimized for production to prevent cross-origin errors.
+### Admin Credentials (for Testing)
+Email: admin@gmail.com 
 
- Admin Credentials (for Testing)
-Email: admin@lifeflow.com 
-
-Password: 
+Password: 029529Rumi
