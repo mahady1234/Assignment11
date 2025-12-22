@@ -1,16 +1,106 @@
-# React + Vite
+🩸 LifeFlow | Comprehensive Blood Donation Management System
+LifeFlow is a robust MERN-stack platform designed to bridge the gap between blood donors and recipients. It streamlines the process of requesting blood, managing donor databases, and handling emergency requirements through a role-based dashboard system (Admin, Volunteer, and Donor).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🌐 Live Deployment
+Live Site: [Insert Your Live Link Here]
 
-Currently, two official plugins are available:
+Client Repository: [Insert GitHub Client Link]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Server Repository: [Insert GitHub Server Link]
 
-## React Compiler
+🛠️ Tech Stack & Packages Used
+Frontend
+Framework: React (v19) with Vite
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Styling: Tailwind CSS & DaisyUI (Custom Theme)
 
-## Expanding the ESLint configuration
+Routing: React Router Dom (v7)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Icons & Animation: Lucide-React, React Icons, Framer Motion
+
+State & Forms: React Hook Form, Axios
+
+Visualization: Recharts (for Dashboard Analytics)
+
+Notifications: React Hot Toast / SweetAlert2
+
+Backend & Security
+Environment: Node.js & Express.js
+
+Database: MongoDB
+
+Authentication: Firebase Auth & JWT (JSON Web Tokens)
+
+Payment: Stripe (for Funding System)
+
+✨ Key Features
+🔐 Role-Based Access Control (RBAC)
+Admin: Full control over users (block/unblock), role management, and all donation requests.
+
+Volunteer: Can manage all donation requests and update statuses, with restricted access to administrative settings.
+
+Donor: Can create blood requests, manage personal profile, and view their donation history.
+
+🩸 Donation Management
+Search Engine: Advanced filtering by Blood Group, District, and Upazila to find donors instantly.
+
+Request Lifecycle: Complete workflow from Pending → Inprogress → Done/Canceled.
+
+Public Requests: A dedicated page for pending requests where any logged-in user can step up to donate.
+
+📊 Advanced Dashboard
+Statistics: Interactive charts (using Recharts) showing total donors, funds, and donation requests.
+
+Pagination & Filtering: Tabular data management with server-side pagination for seamless performance.
+
+Dynamic Profile: Non-editable email security with an easy-to-use toggle for profile updates.
+
+💳 Funding & Payments
+Secure Transactions: Integrated Stripe Payment Gateway for users to contribute funds to the organization.
+
+Financial History: A transparent funding page showing all contributions in real-time.
+
+🚀 Installation & Local Setup
+Clone the repositories:
+
+Bash
+
+git clone https://github.com/your-username/blood-donation-client
+git clone https://github.com/your-username/blood-donation-server
+Install dependencies (both Client & Server):
+
+Bash
+
+npm install
+Environment Variables: Create a .env file in the root of both folders and add the following:
+
+Server .env:
+
+Code snippet
+
+DB_USER=your_mongodb_user
+DB_PASS=your_mongodb_password
+JWT_SECRET=your_jwt_secret_key
+STRIPE_SECRET_KEY=your_stripe_key
+Client .env:
+
+Code snippet
+
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_STRIPE_PUBLIC_KEY=your_stripe_key
+Run the application:
+
+Bash
+
+npm run dev
+ Security Measures
+Environment Variables: Sensitive Firebase and MongoDB credentials are fully secured.
+
+JWT Authentication: Private routes and APIs are protected via JWT tokens stored securely.
+
+CORS Configuration: Server is optimized for production to prevent cross-origin errors.
+
+ Admin Credentials (for Testing)
+Email: admin@lifeflow.com 
+
+Password: 

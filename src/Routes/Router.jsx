@@ -48,11 +48,11 @@ const router = createBrowserRouter([
                 element: <PrivateRoute><Funding></Funding></PrivateRoute>
             }, {
                 path: '/payment-success',
-                element: <Funding></Funding>
+                element: <PrivateRoute><Funding></Funding></PrivateRoute>
             }
             , {
                 path: '/payment-cancelled',
-                element: <PaymentCancel></PaymentCancel>
+                element: <PrivateRoute><PaymentCancel></PaymentCancel></PrivateRoute>
             }
 
         ]
@@ -64,15 +64,15 @@ const router = createBrowserRouter([
         element: <PrivateRoute><DashBoardLayout /></PrivateRoute>,
         children: [
             {
-                index: true, 
+                index: true,
                 element: <PrivateRoute><DashBoardHome /></PrivateRoute>
             },
             {
-                path: 'my-donation-requests', 
+                path: 'my-donation-requests',
                 element: <PrivateRoute><MyRequest /></PrivateRoute>
             },
             {
-                path: 'volunteer-donation-requests', 
+                path: 'volunteer-donation-requests',
                 element: <PrivateRoute><VolunteerAllRequest /></PrivateRoute>
             },
             {
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
             }
             ,
             {
-                path: 'profile', 
+                path: 'profile',
                 element: <PrivateRoute><Profile /></PrivateRoute>
             },
             {
