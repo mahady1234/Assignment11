@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
     const [roleLoading, setRoleLoading] = useState(true)
     const [role, setRole] = useState('')
     const [userStatus, setUserStatus] = useState('')
-    const axiosSecure = useAxiosSecure(user); 
+    const axiosSecure = useAxiosSecure(user);
 
 
 
@@ -52,11 +52,11 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
-   
+
     useEffect(() => {
         if (!user) return;
 
-        axios.get(`https://blood-donation-server-kappa.vercel.app/users/role/${user.email}`, {
+        axios.get(`http://localhost:5000/users/role/${user.email}`, {
             headers: { Authorization: `Bearer ${user.accessToken}` }
         })
             .then(res => {
@@ -90,3 +90,6 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+
+
+
