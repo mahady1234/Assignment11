@@ -7,7 +7,6 @@ import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut, u
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 import useAxiosSecure from '../Hooks/useAxiosSecure';
-import axios from 'axios';
 const auth = getAuth(app)
 
 const AuthProvider = ({ children }) => {
@@ -56,7 +55,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         if (!user) return;
 
-        axios.get(`http://localhost:5000/users/role/${user.email}`, {
+        axiosSecure.get(`/users/role/${user.email}`, {
             headers: { Authorization: `Bearer ${user.accessToken}` }
         })
             .then(res => {
@@ -66,7 +65,7 @@ const AuthProvider = ({ children }) => {
             })
             .catch(err => console.log(err));
 
-    }, [user]);
+    }, [axiosSecure, user]);
 
     const authData = {
         auth,

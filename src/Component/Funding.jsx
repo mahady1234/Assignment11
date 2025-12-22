@@ -1,6 +1,3 @@
-
-
-
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Auth/AuthProvider';
 import { useSearchParams } from 'react-router';
@@ -46,7 +43,7 @@ const Funding = () => {
             }
             fetchSuccess();
         }
-    }, [axiosSecure,  session_id]);
+    }, [axiosSecure,session_id]);
 
 
     const fetchFundings = () => {
