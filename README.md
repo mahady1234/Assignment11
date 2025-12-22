@@ -9,7 +9,7 @@ Client Repository: [(https://github.com/mahady1234/Assignment11.git)]
 Server Repository: [https://github.com/mahady1234/Assignment11ServerSite.git]
 
 ### Tech Stack & Packages Used
-Frontend
+
 Framework: React (v19) with Vite
 
 Styling: Tailwind CSS & DaisyUI (Custom Theme)
