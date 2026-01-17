@@ -75,7 +75,7 @@ const Funding = () => {
                     className="input border-2 border-black"
                     required
                 />
-                <button className='btn btn-primary' type='submit'>Donate</button>
+                <button className='btn bg-red-800 text-white' type='submit'>Donate</button>
             </form>
 
             <div className='overflow-x-auto'>
