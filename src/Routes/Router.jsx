@@ -21,6 +21,9 @@ import PaymentCancel from "../Component/PaymentCancel";
 import AdminFunding from "../Component/AdminFunding";
 import DonationRequestView from "../Component/DonationRequestView";
 import DonationRequestEdit from "../Component/DonationRequestEdit";
+import About from "../Component/About";
+import BlogNews from "../Component/Blog";
+import FAQ from "../Component/FAQ";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +41,18 @@ const router = createBrowserRouter([
             {
                 path: '/search',
                 element: <Search></Search>
+            },
+            {
+                path: '/about',
+                element: <About></About>
+            },
+            {
+                path: '/faq',
+                element: <FAQ></FAQ>
+            },
+            {
+                path: '/blog',
+                element: <BlogNews></BlogNews>
             },
             {
                 path: '/donationDetail/:id',
