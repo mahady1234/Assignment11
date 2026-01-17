@@ -40,10 +40,13 @@ const Navbar = () => {
                                 <li><NavLink to='/'>Home</NavLink></li>
                                 <li><NavLink to='/allDonationRequest'>Donation Request</NavLink></li>
                                 <li><NavLink to='/search'>Search Donor</NavLink></li>
+                                <li><NavLink to='/about'>About</NavLink></li>
+                                <li><NavLink to='/faq'>FAQ</NavLink></li>
+                                <li><NavLink to='/blog'>Blog</NavLink></li>
 
 
                                 {user && <li><NavLink to='/funding'>Funding</NavLink></li>}
-                              
+
                             </ul>
                         </div>
 
@@ -58,10 +61,13 @@ const Navbar = () => {
                     </div>
 
                     <div className="hidden lg:flex">
-                        <ul className="menu menu-horizontal gap-6 font-bold text-lg">
+                        <ul className="menu menu-horizontal gap-2 font-bold text-[16px]">
                             <li><NavLink to='/'>Home</NavLink></li>
                             <li><NavLink to='/allDonationRequest'>Donation Request</NavLink></li>
                             <li><NavLink to='/search'>Search Donor</NavLink></li>
+                            <li><NavLink to='/about'>About</NavLink></li>
+                            <li><NavLink to='/faq'>FAQ</NavLink></li>
+                            <li><NavLink to='/blog'>Blog</NavLink></li>
 
 
                             {user && <li><NavLink to='/funding'>Funding</NavLink></li>}

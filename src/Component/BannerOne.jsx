@@ -36,7 +36,7 @@ const BannerOne = () => {
             {slides.map((slide, index) => (
                 <div
                     key={slide.id}
-                    className={`absolute w-11/12 sm:w-8/12 h-2/3 sm:h-3/4 rounded-xl shadow-2xl shadow-red-900 transition-opacity duration-1000 flex flex-col justify-start items-center text-center
+                    className={`absolute w-11/12 sm:w-8/12 h-2/3 sm:h-3/4 rounded-xl shadow-2xl shadow-red-800 transition-opacity duration-1000 flex flex-col justify-start items-center text-center
                         ${index === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}
                     style={{
                         backgroundImage: `url(${slide.image})`,
@@ -58,7 +58,7 @@ const BannerOne = () => {
                     <button
                         key={index}
                         onClick={() => setCurrent(index)}
-                        className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors ${index === current ? "bg-blue-500" : "bg-gray-400"}`}
+                        className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors ${index === current ? "bg-red-800" : "bg-gray-400"}`}
                     />
                 ))}
             </div>
